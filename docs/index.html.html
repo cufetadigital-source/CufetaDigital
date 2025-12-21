@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cufeta Digital - Criação de Sites e Plataformas Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2A5B8C;
+            --primary-dark: #1E4569;
+            --secondary: #F8B739;
+            --secondary-dark: #E09B1C;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gray: #6C757D;
+            --light-gray: #E9ECEF;
+            --success: #28A745;
+            --whatsapp: #25D366;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1da851;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .whatsapp-button {
+            width: 60px;
+            height: 60px;
+            background-color: var(--whatsapp);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-tooltip {
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(42, 91, 140, 0.9), rgba(42, 91, 140, 0.9)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Portfolio Section */
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background-color: white;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-img {
+            height: 250px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-text {
+            font-weight: 500;
+        }
+
+        .about-image {
+            flex: 1;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 8px;
+            background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--light);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -10px;
+            width: 20px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* WhatsApp Contact Section */
+        .whatsapp-contact {
+            background-color: var(--light);
+            text-align: center;
+        }
+
+        .whatsapp-box {
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .whatsapp-icon {
+            font-size: 4rem;
+            color: var(--whatsapp);
+            margin-bottom: 20px;
+        }
+
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 15px 0;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                order: -1;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step:not(:last-child):after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 0 0 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-box {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .about-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <div class="whatsapp-tooltip">Fale connosco no WhatsApp</div>
+        <a href="https://wa.me/244956326840?text=Olá! Gostaria de saber mais sobre os serviços da Cufeta Digital" target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">Cufeta<span>Digital</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#process">Processo</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="https://wa.me/244956326840?text=Olá! Gostaria de saber mais sobre os serviços da Cufeta Digital" target="_blank" class="btn btn-whatsapp" style="padding: 8px 15px; font-size: 0.9rem;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Soluções Digitais para o Seu Negócio</h1>
+            <p>Criamos websites, plataformas web e soluções digitais personalizadas que impulsionam a sua presença online e convertem visitantes em clientes.</p>
+            <div class="hero-btns">
+                <a href="#portfolio" class="btn">Ver Portfólio</a>
+                <a href="https://wa.me/244956326840?text=Olá! Gostaria de solicitar um orçamento para criação de site" target="_blank" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+                </a>
+                <a href="#contact" class="btn btn-secondary">Solicitar Orçamento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+                <p>Oferecemos soluções completas para sua presença digital</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Desenvolvimento de Sites</h3>
+                    <p>Criamos websites responsivos, modernos e otimizados para SEO que se adaptam a todos os dispositivos e geram resultados.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de saber mais sobre desenvolvimento de sites" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Lojas Online</h3>
+                    <p>Desenvolvemos plataformas de e-commerce completas com sistemas de pagamento seguros e gestão de inventário integrada.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de criar uma loja online" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Plataformas Web</h3>
+                    <p>Criamos sistemas web personalizados para gestão de negócios, aplicações empresariais e soluções específicas.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de desenvolver uma plataforma web" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Design Responsivo</h3>
+                    <p>Garantimos que todos os nossos projetos funcionem perfeitamente em computadores, tablets e smartphones.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de um site responsivo" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Otimização SEO</h3>
+                    <p>Otimizamos seu site para motores de busca, aumentando sua visibilidade e atraindo mais tráfego qualificado.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de otimizar meu site para SEO" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Suporte Técnico</h3>
+                    <p>Oferecemos manutenção contínua, atualizações e suporte técnico para garantir o funcionamento perfeito do seu site.</p>
+                    <a href="https://wa.me/244956326840?text=Olá! Preciso de suporte técnico para meu site" target="_blank" class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Saber mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Portfólio</h2>
+                <p>Conheça alguns dos nossos projetos realizados</p>
+            </div>
+            
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="website">Websites</button>
+                <button class="filter-btn" data-filter="ecommerce">Lojas Online</button>
+                <button class="filter-btn" data-filter="platform">Plataformas</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="website">
+                    <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80');"></div>
+                    <div class="portfolio-content">
+                        <h3>Restaurante Sabores</h3>
+                        <p>Website responsivo para restaurante com cardápio online, reservas e sistema de entregas.</p>
+                        <a href="https://wa.me/244956326840?text=Olá! Gostaria de um site semelhante ao do Restaurante Sabores" target="_blank" class="btn btn-secondary" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Pedir orçamento</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="ecommerce">
+                    <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="portfolio-content">
+                        <h3>Moda Fashion Store</h3>
+                        <p>Loja online de moda com catálogo completo, carrinho de compras e integração com pagamentos.</p>
+                        <a href="https://wa.me/244956326840?text=Olá! Gostaria de uma loja online como a Moda Fashion Store" target="_blank" class="btn btn-secondary" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Pedir orçamento</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="platform">
+                    <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="portfolio-content">
+                        <h3>ERP Empresarial</h3>
+                        <p>Plataforma de gestão empresarial com módulos financeiros, de RH e controle de inventário.</p>
+                        <a href="https://wa.me/244956326840?text=Olá! Gostaria de uma plataforma de gestão empresarial" target="_blank" class="btn btn-secondary" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">Pedir orçamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre a Cufeta Digital</h2>
+                <p>Conheça nossa história e missão</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Transformamos ideias em realidade digital</h3>
+                    <p>A Cufeta Digital nasceu da paixão por tecnologia e da vontade de ajudar empresas a crescerem no ambiente digital. Com anos de experiência no mercado, desenvolvemos soluções web que realmente fazem a diferença para nossos clientes.</p>
+                    <p>Acreditamos que cada projeto é único e merece atenção especial. Por isso, trabalhamos lado a lado com nossos clientes para entender suas necessidades e criar soluções personalizadas que atendam aos seus objetivos de negócio.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-text">Projetos Concluídos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-text">Clientes Satisfeitos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1+</span>
+                            <span class="stat-text">Anos de Experiência</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/244956326840?text=Olá! Gostaria de conhecer mais sobre a Cufeta Digital" target="_blank" class="btn btn-whatsapp" style="margin-top: 20px;">
+                        <i class="fab fa-whatsapp"></i> Fale connosco
+                    </a>
+                </div>
+                
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Processo</h2>
+                <p>Como trabalhamos para garantir o sucesso do seu projeto</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Análise & Planeamento</h3>
+                    <p>Compreendemos suas necessidades, objetivos e público-alvo para criar uma estratégia eficaz.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Design & Prototipagem</h3>
+                    <p>Criamos designs modernos e funcionais, com protótipos para sua avaliação e feedback.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Desenvolvimento</h3>
+                    <p>Transformamos o design em código, utilizando as melhores tecnologias e práticas do mercado.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Testes & Lançamento</h3>
+                    <p>Realizamos testes rigorosos e, após sua aprovação, lançamos o projeto com suporte contínuo.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://wa.me/244956326840?text=Olá! Gostaria de iniciar um projeto com a Cufeta Digital" target="_blank" class="btn btn-whatsapp" style="font-size: 1.1rem; padding: 15px 30px;">
+                    <i class="fab fa-whatsapp"></i> Iniciar um Projeto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Contact Section -->
+    <section class="whatsapp-contact">
+        <div class="container">
+            <div class="whatsapp-box">
+                <div class="whatsapp-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h2>Fale Connosco no WhatsApp</h2>
+                <p>Respondemos rapidamente e estamos prontos para tirar todas as suas dúvidas sobre criação de sites, plataformas web e muito mais.</p>
+                <a href="https://wa.me/244956326840?text=Olá! Gostaria de falar com a Cufeta Digital" target="_blank" class="phone-number">+244 956 326 840</a>
+                <p style="margin-top: 20px;">Clique no número acima ou no botão abaixo para iniciar uma conversa no WhatsApp.</p>
+                <a href="https://wa.me/244956326840?text=Olá! Gostaria de falar com a Cufeta Digital" target="_blank" class="btn btn-whatsapp" style="margin-top: 20px; font-size: 1.1rem; padding: 15px 30px;">
+                    <i class="fab fa-whatsapp"></i> Abrir no WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contacto</h2>
+                <p>Vamos conversar sobre o seu projeto</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Vamos trabalhar juntos</h3>
+                    <p>Tem um projeto em mente? Entre em contacto conosco para discutirmos como podemos ajudar a transformar suas ideias em realidade.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Localização</h4>
+                            <p>Luanda, Angola</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Telefone / WhatsApp</h4>
+                            <p><a href="https://wa.me/244956326840" target="_blank" style="color: var(--primary); text-decoration: none;">+244 956 326 840</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@cufetadigital.ao</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4>WhatsApp Direto</h4>
+                            <p><a href="https://wa.me/244956326840?text=Olá! Gostaria de informações sobre criação de sites" target="_blank" class="btn btn-whatsapp" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 5px;">
+                                <i class="fab fa-whatsapp"></i> Enviar mensagem
+                            </a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Seu nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Seu email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Assunto" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                        <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">Ou se preferir:</p>
+                        <a href="https://wa.me/244956326840?text=Olá! Gostaria de solicitar um orçamento para criação de site" target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: 10px;">
+                            <i class="fab fa-whatsapp"></i> Enviar pelo WhatsApp
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">Cufeta<span>Digital</span></div>
+                    <p>Especialistas em criação de websites, plataformas web e soluções digitais que impulsionam negócios.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/244956326840" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <div class="footer-links">
+                        <h3>Links Rápidos</h3>
+                        <ul>
+                            <li><a href="#home">Início</a></li>
+                            <li><a href="#services">Serviços</a></li>
+                            <li><a href="#portfolio">Portfólio</a></li>
+                            <li><a href="#about">Sobre</a></li>
+                            <li><a href="#contact">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <div class="footer-links">
+                        <h3>Contacto Rápido</h3>
+                        <ul>
+                            <li><i class="fab fa-whatsapp" style="color: var(--whatsapp); margin-right: 8px;"></i> <a href="https://wa.me/244956326840" target="_blank">WhatsApp: +244 956 326 840</a></li>
+                            <li><i class="fas fa-envelope" style="color: var(--secondary); margin-right: 8px;"></i> info@cufetadigital.ao</li>
+                            <li><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 8px;"></i> Luanda, Angola</li>
+                            <li><a href="https://wa.me/244956326840?text=Olá! Gostaria de um orçamento urgente" target="_blank" class="btn btn-whatsapp" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 10px; display: inline-block;">Orçamento Urgente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy;Cufeta Digital. Todos os direitos reservados. | WhatsApp: <a href="https://wa.me/244956326840" target="_blank" style="color: var(--whatsapp);">+244 956 326 840</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Portfolio Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server here
+            // For now, we'll just show an alert and redirect to WhatsApp
+            alert('Obrigado pela sua mensagem! Vamos redirecioná-lo para o WhatsApp para um atendimento mais rápido.');
+            
+            // Get form values
+            const name = this.querySelector('input[type="text"]').value;
+            const subject = this.querySelector('input[placeholder="Assunto"]').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Olá! Sou ${name}. ${subject}. Gostaria de mais informações sobre os serviços da Cufeta Digital.`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Redirect to WhatsApp
+            window.open(`https://wa.me/244956326840?text=${encodedMessage}`, '_blank');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // Skip if it's a WhatsApp link
+                if (this.getAttribute('href').includes('wa.me') || this.getAttribute('href').includes('whatsapp')) {
+                    return;
+                }
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '0';
+                document.querySelector('.header-container').style.padding = '10px 20px';
+            } else {
+                header.style.padding = '';
+                document.querySelector('.header-container').style.padding = '20px';
+            }
+        });
+        
+        // WhatsApp click tracking
+        document.querySelectorAll('a[href*="whatsapp"], a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // You can add analytics tracking here
+                console.log('WhatsApp link clicked:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>
